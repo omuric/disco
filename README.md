@@ -9,9 +9,7 @@ TBW
 ## Configuration
 
 ```bash
-DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/xxxx/yyyy"
-mkdir -p ~/.config/disco
-echo "{\"webhook_url\":\"${DISCORD_WEBHOOK_URL}\"}" > ~/.config/disco/config
+$ disco configure --webhook-url "https://discord.com/api/webhooks/xxxx/yyyy"
 ```
 
 ## Usage

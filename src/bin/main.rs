@@ -1,6 +1,6 @@
 use anyhow::Result;
 use chrono::Local;
-use disco::config::read_config;
+use disco::config::{read_config, write_config, Config};
 use disco::discord::DiscordClient;
 use structopt::StructOpt;
 use tokio::io::AsyncReadExt;
@@ -67,12 +67,29 @@ async fn send_file(opt: SendFileOpt) -> Result<()> {
 }
 
 #[derive(StructOpt, Debug)]
+struct ConfigureOpt {
+    // Discord webhook url
+    #[structopt(short, long)]
+    webhook_url: String,
+}
+
+async fn configure(opt: ConfigureOpt) -> Result<()> {
+    let config = Config {
+        webhook_url: opt.webhook_url,
+    };
+    write_config(config).await?;
+    Ok(())
+}
+
+#[derive(StructOpt, Debug)]
 #[structopt(name = "disco")]
 enum Opt {
     /// Pipe command output.
     Cat(CatOpt),
     /// Send existing file.
     SendFile(SendFileOpt),
+    /// Setup
+    Configure(ConfigureOpt),
 }
 
 #[tokio::main]
@@ -81,5 +98,6 @@ async fn main() -> Result<()> {
     match opt {
         Opt::Cat(opt) => cat(opt).await,
         Opt::SendFile(opt) => send_file(opt).await,
+        Opt::Configure(opt) => configure(opt).await,
     }
 }
