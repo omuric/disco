@@ -4,12 +4,12 @@ Disco is a tool for sending messages to discord.
 
 ## Installing
 
-Download the binary directly.
+Download the latest Linux x86_64 binary using the [GitHub CLI](https://cli.github.com/).
 
 ```bash
-wget https://github.com/omuric/disco/releases/download/0.1.3/disco_0.1.3_x86_64-unknown-linux-musl.zip
-unzip disco_*_x86_64-unknown-linux-musl.zip disco
-rm disco_*_x86_64-unknown-linux-musl.zip
+gh release download --repo omuric/disco --pattern 'disco_*_x86_64-unknown-linux-musl.zip' --output disco.zip
+unzip disco.zip disco
+rm disco.zip
 ./disco --help
 ```
 
@@ -19,12 +19,12 @@ rm disco_*_x86_64-unknown-linux-musl.zip
 sudo mv ./disco /usr/local/bin/disco
 ```
 
-Or build by yourself.
+Or build from source with the latest stable [Rust toolchain](https://rustup.rs/).
 
 ```bash
-git clone git@github.com:omuric/disco.git
+git clone https://github.com/omuric/disco.git
 cd disco
-cargo install --path .
+cargo install --path . --locked
 ```
 
 TODO: Change to installation via Crates.io
@@ -52,5 +52,15 @@ echo "hello" | disco cat --snippet
 Send file with comment.
 
 ```bash
-disco send-file REAMD.md --comment "comment"
+disco send-file README.md --comment "comment"
 ```
+
+## Development
+
+```bash
+cargo fmt --all -- --check
+cargo clippy --locked --all-targets -- -D warnings
+cargo test --locked --all-targets
+```
+
+Configuration is stored in `~/.config/disco/config.json`.

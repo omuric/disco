@@ -1,6 +1,6 @@
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 use reqwest::multipart;
-use serde_derive::Serialize;
+use serde::Serialize;
 
 pub struct DiscordClient {
     webhook_url: String,
