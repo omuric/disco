@@ -4,12 +4,12 @@ Disco is a tool for sending messages to discord.
 
 ## Installing
 
-Download the latest Linux x86_64 binary using the [GitHub CLI](https://cli.github.com/).
+Download the binary directly.
 
 ```bash
-gh release download --repo omuric/disco --pattern 'disco_*_x86_64-unknown-linux-musl.zip' --output disco.zip
-unzip disco.zip disco
-rm disco.zip
+wget https://github.com/omuric/disco/releases/download/0.1.4/disco_0.1.4_x86_64-unknown-linux-musl.zip
+unzip disco_*_x86_64-unknown-linux-musl.zip disco
+rm disco_*_x86_64-unknown-linux-musl.zip
 ./disco --help
 ```
 
